@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<sdf version="1.10">
+  <world name="test_world">
+
+    <plugin filename="gz-sim-physics-system"
+            name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system"
+            name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+            name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system"
+            name="gz::sim::systems::Sensors">
+                 <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system"
+            name="gz::sim::systems::Imu"/>
+
+
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- ======== FLOOR ======== -->
+    <model name="floor">
+      <static>true</static>
+      <link name="link">
+        <collision name="col">
+          <geometry><plane><normal>0 0 1</normal><size>8 8</size></plane></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><plane><normal>0 0 1</normal><size>8 8</size></plane></geometry>
+          <material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ======== WALLS ======== -->
+    <model name="wall_north">
+      <static>true</static><pose>0 4.0 0.915 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>8.1 0.1 1.83</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>8.1 0.1 1.83</size></box></geometry>
+          <material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="wall_south">
+      <static>true</static><pose>0 -4.0 0.915 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>8.1 0.1 1.83</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>8.1 0.1 1.83</size></box></geometry>
+          <material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="wall_east">
+      <static>true</static><pose>4.0 0 0.915 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.1 8.1 1.83</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.1 8.1 1.83</size></box></geometry>
+          <material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="wall_west">
+      <static>true</static><pose>-4.0 0 0.915 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.1 8.1 1.83</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.1 8.1 1.83</size></box></geometry>
+          <material><ambient>0.9 0.9 0.9 1</ambient><diffuse>0.9 0.9 0.9 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- ======== DOCKING STATION — south wall center ======== -->
+    <!-- Flat base platform (thin 3cm) -->
+    <model name="dock_base">
+      <static>true</static>
+      <pose>0 -3.55 0.015 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.7 0.4 0.03</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.7 0.4 0.03</size></box></geometry>
+          <material><ambient>0.1 0.1 0.8 1</ambient><diffuse>0.1 0.1 0.8 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Ramp approaching from front (tilted box) -->
+    <!-- ramp is 0.4m long, rises 0.03m over that length -->
+    <!-- angle = atan(0.03/0.4) = ~4.3 degrees = 0.075 rad -->
+    <model name="dock_ramp">
+      <static>true</static>
+      <pose>0 -3.15 0.008 -0.075 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.7 0.4 0.015</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.7 0.4 0.015</size></box></geometry>
+          <material><ambient>0.2 0.2 0.9 1</ambient><diffuse>0.2 0.2 0.9 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Left side guide wall -->
+    <model name="dock_guide_left">
+      <static>true</static>
+      <pose>-0.38 -3.35 0.06 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.04 0.8 0.12</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.04 0.8 0.12</size></box></geometry>
+          <material><ambient>0.8 0.8 0.0 1</ambient><diffuse>0.8 0.8 0.0 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- Right side guide wall -->
+    <model name="dock_guide_right">
+      <static>true</static>
+      <pose>0.38 -3.35 0.06 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.04 0.8 0.12</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.04 0.8 0.12</size></box></geometry>
+          <material><ambient>0.8 0.8 0.0 1</ambient><diffuse>0.8 0.8 0.0 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- ======== 5 RANDOM BOXES ======== -->
+    <model name="box_1">
+      <static>true</static><pose>1.5 1.0 0.2 0 0 0.3</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.4 0.4 0.4</size></box></geometry>
+          <material><ambient>0.8 0.2 0.2 1</ambient><diffuse>0.8 0.2 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="box_2">
+      <static>true</static><pose>-2.0 0.5 0.2 0 0 0.8</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.4 0.4 0.4</size></box></geometry>
+          <material><ambient>0.2 0.8 0.2 1</ambient><diffuse>0.2 0.8 0.2 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="box_3">
+      <static>true</static><pose>0.5 -1.5 0.2 0 0 1.2</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.4 0.4 0.4</size></box></geometry>
+          <material><ambient>0.8 0.5 0.1 1</ambient><diffuse>0.8 0.5 0.1 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="box_4">
+      <static>true</static><pose>-1.0 -2.0 0.2 0 0 0.5</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.4 0.4 0.4</size></box></geometry>
+          <material><ambient>0.5 0.1 0.8 1</ambient><diffuse>0.5 0.1 0.8 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="box_5">
+      <static>true</static><pose>2.5 -1.0 0.2 0 0 1.0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.4 0.4 0.4</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.4 0.4 0.4</size></box></geometry>
+          <material><ambient>0.1 0.6 0.8 1</ambient><diffuse>0.1 0.6 0.8 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <!-- ======== GOAL — north side, green platform + red ball ======== -->
+    <model name="goal_platform">
+      <static>true</static><pose>0 3.0 0.05 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><box><size>0.8 0.8 0.1</size></box></geometry></collision>
+        <visual name="vis"><geometry><box><size>0.8 0.8 0.1</size></box></geometry>
+          <material><ambient>0.0 0.8 0.0 1</ambient><diffuse>0.0 0.8 0.0 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="target_ball">
+      <static>true</static><pose>0 3.0 0.25 0 0 0</pose>
+      <link name="link">
+        <collision name="col"><geometry><sphere><radius>0.15</radius></sphere></geometry></collision>
+        <visual name="vis"><geometry><sphere><radius>0.15</radius></sphere></geometry>
+          <material><ambient>1.0 0.0 0.0 1</ambient><diffuse>1.0 0.0 0.0 1</diffuse></material></visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
