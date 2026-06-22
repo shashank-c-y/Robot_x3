@@ -1,3 +1,18 @@
 # ro #
-[os] - ubuntu mate 24
+[linux_os] - ubuntu mate 24
 [ros2] - jazzy
+[gazebo] - humble
+
+# depency #
+
+sudo apt update
+sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-urdf-tutorial ros-jazzy-xacro
+
+# build #
+
+colcon build --packages-select ro_description
+source install/setup.bash
+
+# launch #
+
+ros2 launch ro_description sim.launch.py
