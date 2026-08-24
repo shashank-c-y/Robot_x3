@@ -42,17 +42,14 @@ ros2 launch ro_description sim.launch.py
 ```
 ## Usage
 
+Visualize just the robot model (without full Gazebo sim):
+
+```bash
+ros2 launch urdf_tutorial display.launch.py model:=/ro_description/urdf/robots/rosmaster_x3.urdf.xacro
+
 Drive the robot with your keyboard:
 
 ```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
-Visualize just the robot model (without full Gazebo sim):
 
-```bash
-ros2 launch urdf_tutorial display.launch.py model:=<path-to>/ro_description/urdf/robots/rosmaster_x3.urdf.xacro
-
-## Demo
-
-<!-- Add a screenshot or GIF of the robot running in simulation here -->
-![Robot in simulation](./docs/demo.png)
