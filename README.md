@@ -1,5 +1,5 @@
 ROSMaster X3 Robotics Project
-
+A ROS2 (Jazzy) package for the ROSMaster X3 robot — includes the robot's Xacro/URDF models, meshes, and a Gazebo simulation setup.
 
 
 Robot_x3/
@@ -16,3 +16,20 @@ Robot_x3/
                 │   └── sensors/      # sensor definitions (IMU, LiDAR, RGBD camera)
                 ├── meshes/           # 3D visual/collision models (STL) for the robot and sensors
                 └── worlds/           # Gazebo simulation world files
+
+What each folder is for:
+
+ro_description/ — the ROS2 package itself, containing everything needed to describe and simulate the robot.
+launch/ — has sim.launch.py, the entry point that starts the robot in Gazebo.
+urdf/ — the robot's kinematic/physical description, split by purpose: control logic, mechanical structure, sensors, and the final assembled robot.
+meshes/ — the actual 3D shapes (STL files) used to render the robot and its sensors (camera, LiDAR) in simulation.
+worlds/ — the simulated environment the robot is placed into.
+
+Setup & Run
+sudo apt update
+sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-urdf-tutorial ros-jazzy-xacro
+
+colcon build --packages-select ro_description
+source install/setup.bash
+
+ros2 launch ro_description sim.launch.py
