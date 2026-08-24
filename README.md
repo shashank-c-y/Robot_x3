@@ -1,7 +1,18 @@
 ROSMaster X3 Robotics Project
-This repository serves as the central codebase for the ROSMaster X3 robotics project, integrating sensor fusion, 
-mecanum drive control, and Gazebo simulation capabilitie
 
-Project Overview
-This project provides the complete URDF/Xacro models and launch files required to simulate and operate the ROSMaster X3 platform.
-It is designed to be a modular foundation for navigation, mapping, and autonomous control development.
+
+
+Robot_x3/
+└── robot/
+    └── src/
+        └── ro/
+            └── ro_description/       # main ROS2 package
+                ├── launch/           # launch files to start the simulation
+                │   └── sim.launch.py
+                ├── urdf/             # robot model definitions (Xacro)
+                │   ├── control/      # drive/control definitions (mecanum drive)
+                │   ├── mech/         # mechanical parts (base, wheels)
+                │   ├── robots/       # top-level robot assembly file
+                │   └── sensors/      # sensor definitions (IMU, LiDAR, RGBD camera)
+                ├── meshes/           # 3D visual/collision models (STL) for the robot and sensors
+                └── worlds/           # Gazebo simulation world files
