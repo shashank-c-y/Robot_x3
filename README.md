@@ -40,6 +40,17 @@ source install/setup.bash
 
 ros2 launch ro_description sim.launch.py
 ```
+## Usage
+
+Drive the robot with your keyboard:
+
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+
+Visualize just the robot model (without full Gazebo sim):
+
+```bash
+ros2 launch urdf_tutorial display.launch.py model:=<path-to>/ro_description/urdf/robots/rosmaster_x3.urdf.xacro
 
 ## Demo
 
