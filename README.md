@@ -29,26 +29,31 @@ Robot_x3/
 - **`meshes/`** — the actual 3D shapes (STL files) used to render the robot and its sensors (camera, LiDAR) in simulation.
 - **`worlds/`** — the simulated environment the robot is placed into.
 
-<img width="1687" height="1044" alt="Screenshot at 2026-08-24 15-04-18" src="https://github.com/user-attachments/assets/f451825e-6185-424d-97c6-42ce5cf0dfe5" />
-<img width="1678" height="1047" alt="Screenshot at 2026-08-24 15-02-34" src="https://github.com/user-attachments/assets/683f18fc-6d16-411f-b299-9145c7861ba3" />
+<img width="1687" height="1044" alt="Robot in Gazebo simulation" src="https://github.com/user-attachments/assets/f451825e-6185-424d-97c6-42ce5cf0dfe5" />
+<img width="1678" height="1047" alt="RViz visualization of robot model" src="https://github.com/user-attachments/assets/683f18fc-6d16-411f-b299-9145c7861ba3" />
 
 ## Setup & Run
-
+ 
 ```bash
 sudo apt update
 sudo apt install ros-jazzy-ros-gz-sim ros-jazzy-ros-gz-bridge ros-jazzy-urdf-tutorial ros-jazzy-xacro
-
+ 
 colcon build --packages-select ro_description
 source install/setup.bash
-
+ 
 ros2 launch ro_description sim.launch.py
-
+```
+ 
 ## Usage
-
+ 
 Visualize just the robot model (without full Gazebo sim):
-
-ros2 launch urdf_tutorial display.launch.py model:=/ro_description/urdf/robots/rosmaster_x3.urdf.xacro
-
+ 
+```bash
+ros2 launch urdf_tutorial display.launch.py model:=<path-to>/ro_description/urdf/robots/rosmaster_x3.urdf.xacro
+```
+ 
 Drive the robot with your keyboard:
-
+ 
+```bash
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
