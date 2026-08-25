@@ -1,9 +1,9 @@
 # Robot_x3
 
 A ROS2 (Jazzy) package for the ROSMaster X3 robot — includes the robot's Xacro/URDF models, meshes, and a Gazebo simulation setup.
-- **`linux_os/`**
-- **`[ros2] - jazzy/`**
-- **`[gazebo] - humble/`** 
+- **`linux_os`**
+- **`[ros2] - jazzy`**
+- **`[gazebo] - humble`** 
 
 ## Structure
 
